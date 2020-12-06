@@ -28,20 +28,32 @@ public class Project extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/Login.fxml"));
+        FXMLLoader dashLoader = new FXMLLoader(getClass().getResource("/Views/Dashboard.fxml"));
+        Parent dashboard = dashLoader.load();
         Parent root = loader.load();
         LoginController control = loader.getController();
-        Scene scene = new Scene(root);        
-        scene.setFill(Color.TRANSPARENT);
-        stage.setScene(scene);
+        Scene scene1 = new Scene(root); 
+        Scene scene2 = new Scene(dashboard);
+        scene1.setFill(Color.TRANSPARENT);
+        stage.setScene(scene1);
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setOnHidden(e -> {
            cin =  control.getCin();
            System.out.println(cin);
         });
+        
         stage.show();
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        // Drag Handle
         root.setOnMousePressed(new EventHandler<MouseEvent>(){
 
             @Override
