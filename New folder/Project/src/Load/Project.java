@@ -6,6 +6,7 @@
 package Load;
 
 import Controllers.DBCon;
+import Controllers.LoginController;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -23,15 +24,36 @@ import javafx.stage.StageStyle;
  */
 public class Project extends Application {
     double xOffset,yOffset;
+    String cin;
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/Views/Login.fxml"));
-        
-        Scene scene = new Scene(root);        
-        scene.setFill(Color.TRANSPARENT);
-        stage.setScene(scene);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/Login.fxml"));
+        FXMLLoader dashLoader = new FXMLLoader(getClass().getResource("/Views/Dashboard.fxml"));
+        Parent dashboard = dashLoader.load();
+        Parent root = loader.load();
+        LoginController control = loader.getController();
+        Scene scene1 = new Scene(root); 
+        Scene scene2 = new Scene(dashboard);
+        scene1.setFill(Color.TRANSPARENT);
+        stage.setScene(scene1);
         stage.initStyle(StageStyle.TRANSPARENT);
+        stage.setOnHidden(e -> {
+           cin =  control.getCin();
+           System.out.println(cin);
+        });
+        
         stage.show();
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        // Drag Handle
         root.setOnMousePressed(new EventHandler<MouseEvent>(){
 
             @Override
@@ -55,7 +77,6 @@ public class Project extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        DBCon.connect();
         launch(args);
     }
     

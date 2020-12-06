@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: transparent;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LoginController">
+<AnchorPane id="AnchorPane" fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: transparent;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LoginController">
     <stylesheets>
         <URL value="@login.css" />
     </stylesheets>
@@ -30,7 +30,7 @@
                   </ImageView>
                </children>
             </VBox>
-            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: FC7753; -fx-background-radius: 0px 15px 15px 0px;" HBox.hgrow="ALWAYS">
+            <VBox alignment="TOP_CENTER" maxWidth="450.0" minWidth="450.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: FC7753; -fx-background-radius: 0px 15px 15px 0px;" HBox.hgrow="ALWAYS">
                <padding>
                   <Insets bottom="20.0" top="20.0" />
                </padding>
@@ -55,7 +55,12 @@
                         <Font name="Arial Bold" size="30.0" />
                      </font>
                   </Text>
-                  <JFXTextField focusColor="#3f3d57" labelFloat="true" promptText="UserName" unFocusColor="#3f3d57">
+                  <Text fx:id="errormsg" fill="#a10000" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="324.6708984375">
+                     <font>
+                        <Font name="Arial" size="15.0" />
+                     </font>
+                  </Text>
+                  <JFXTextField fx:id="username" focusColor="#3f3d57" labelFloat="true" promptText="UserName" unFocusColor="#3f3d57">
                      <VBox.margin>
                         <Insets bottom="20.0" top="20.0" />
                      </VBox.margin>
@@ -66,7 +71,7 @@
                         <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
                      </padding>
                   </JFXTextField>
-                  <JFXPasswordField focusColor="#3f3d57" labelFloat="true" promptText="Password" unFocusColor="#3f3d57">
+                  <JFXPasswordField fx:id="password" focusColor="#3f3d57" labelFloat="true" promptText="Password" unFocusColor="#3f3d57">
                      <padding>
                         <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
                      </padding>
@@ -77,7 +82,7 @@
                         <Font name="Arial" size="21.0" />
                      </font>
                   </JFXPasswordField>
-                  <JFXButton defaultButton="true" graphicTextGap="5.0" prefHeight="51.0" prefWidth="147.0" ripplerFill="#0fa3b1" style="-fx-background-color: B5E2FA; -fx-cursor: hand;" text="Sign In" textFill="#403d58">
+                  <JFXButton fx:id="signinbtn" defaultButton="true" graphicTextGap="5.0" onAction="#signInHandle" prefHeight="51.0" prefWidth="147.0" ripplerFill="#0fa3b1" style="-fx-background-color: B5E2FA; -fx-cursor: hand;" text="Sign In" textFill="#403d58">
                      <font>
                         <Font name="Arial" size="19.0" />
                      </font>

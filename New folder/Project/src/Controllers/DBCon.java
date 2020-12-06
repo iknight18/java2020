@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  * @author feres
  */
 public class DBCon {
-    public static void connect(){
+    public static Connection connect(){
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
         } catch (ClassNotFoundException ex) {
@@ -26,7 +26,6 @@ public class DBCon {
         } catch (SQLException ex) {
             System.out.println("Coudnlt Connect"+ ex.getMessage());
         }
-    
-    
+        return connection;
     }
 }
