@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: transparent;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LoginController">
+    <stylesheets>
+        <URL value="@login.css" />
+    </stylesheets>
+   <children>
+      <HBox layoutX="165.0" layoutY="134.0" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox alignment="CENTER" maxWidth="450.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: B5E2FA; -fx-background-radius: 5px;" HBox.hgrow="ALWAYS">
+               <children>
+                  <ImageView fitHeight="285.0" fitWidth="334.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/Logo2.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </VBox>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: FC7753; -fx-background-radius: 0px 15px 15px 0px;" HBox.hgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="20.0" top="20.0" />
+               </padding>
+               <HBox.margin>
+                  <Insets bottom="20.0" top="20.0" />
+               </HBox.margin>
+               <children>
+                  <HBox alignment="TOP_RIGHT" prefHeight="45.0" prefWidth="440.0" VBox.vgrow="NEVER">
+                     <children>
+                        <FontAwesomeIconView fx:id="exbutton" fill="#b5e2fa" glyphName="TIMES" size="30" style="-fx-cursor: hand;">
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                        </FontAwesomeIconView>
+                     </children>
+                  </HBox>
+                  <Text fill="#3f3d57" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign In" textAlignment="CENTER">
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="60.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Arial Bold" size="30.0" />
+                     </font>
+                  </Text>
+                  <JFXTextField focusColor="#3f3d57" labelFloat="true" promptText="UserName" unFocusColor="#3f3d57">
+                     <VBox.margin>
+                        <Insets bottom="20.0" top="20.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Arial" size="21.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
+                     </padding>
+                  </JFXTextField>
+                  <JFXPasswordField focusColor="#3f3d57" labelFloat="true" promptText="Password" unFocusColor="#3f3d57">
+                     <padding>
+                        <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets bottom="20.0" top="20.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Arial" size="21.0" />
+                     </font>
+                  </JFXPasswordField>
+                  <JFXButton defaultButton="true" graphicTextGap="5.0" prefHeight="51.0" prefWidth="147.0" ripplerFill="#0fa3b1" style="-fx-background-color: B5E2FA; -fx-cursor: hand;" text="Sign In" textFill="#403d58">
+                     <font>
+                        <Font name="Arial" size="19.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="50.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <Text fill="#0588d3" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-cursor: hand;" text="Forgot Password?" textAlignment="CENTER" underline="true">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Text>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
