@@ -7,6 +7,9 @@ package Load;
 
 import Controllers.DBCon;
 import Controllers.LoginController;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -25,36 +28,41 @@ import javafx.stage.StageStyle;
 public class Project extends Application {
     double xOffset,yOffset;
     String cin;
-    @Override
-    public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/Login.fxml"));
-        FXMLLoader dashLoader = new FXMLLoader(getClass().getResource("/Views/Dashboard.fxml"));
+    
+    // The Dashboard Launshing Methode
+    public void Dashboard() throws IOException{
+    FXMLLoader dashLoader = new FXMLLoader(getClass().getResource("/Views/Dashboard.fxml"));
         Parent dashboard = dashLoader.load();
-        Parent root = loader.load();
-        LoginController control = loader.getController();
-        Scene scene1 = new Scene(root); 
-        Scene scene2 = new Scene(dashboard);
-        scene1.setFill(Color.TRANSPARENT);
-        stage.setScene(scene1);
-        stage.initStyle(StageStyle.TRANSPARENT);
-        stage.setOnHidden(e -> {
-           cin =  control.getCin();
-           System.out.println(cin);
-        });
-        
+        Scene scene = new Scene(dashboard);
+        Stage stage = new Stage();
+        stage.setScene(scene);
         stage.show();
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        // Drag Handle
-        root.setOnMousePressed(new EventHandler<MouseEvent>(){
+    }
+    
+    // The Login Launshing Methode
+    public void Login() throws IOException{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/Login.fxml"));
+            Parent root = loader.load();
+            LoginController control = loader.getController();
+            Scene scene = new Scene(root); 
+            scene.setFill(Color.TRANSPARENT);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.setOnHiding(e -> {  // When Login Closes the right way
+                    cin =  control.getCin();
+                try {
+                    if(cin != "N" && cin != "" && cin != null) {
+                        Dashboard();}// we open the Dash
+                } catch (IOException ex) {
+                    Logger.getLogger(Project.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                    System.out.println("cin is " +cin);
+                 });
+            stage.show();
+            
+            // Drag Handle
+            root.setOnMousePressed(new EventHandler<MouseEvent>(){
 
             @Override
             public void handle(MouseEvent event) {
@@ -63,7 +71,7 @@ public class Project extends Application {
             }
         
         });
-        root.setOnMouseDragged(new EventHandler<MouseEvent>(){
+             root.setOnMouseDragged(new EventHandler<MouseEvent>(){
             @Override
             public void handle(MouseEvent event) {
                 stage.setX(event.getScreenX()-xOffset);
@@ -71,11 +79,14 @@ public class Project extends Application {
             }
         
         });
+
+    }
+    
+    @Override
+    public void start(Stage stage) throws Exception {
+        Login(); // starting with Login
     }
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         launch(args);
     }
