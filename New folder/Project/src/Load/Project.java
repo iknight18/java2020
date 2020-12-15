@@ -36,7 +36,27 @@ public class Project extends Application {
         Scene scene = new Scene(dashboard);
         Stage stage = new Stage();
         stage.setScene(scene);
+        stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();
+        // Drag Handle
+            dashboard.setOnMousePressed(new EventHandler<MouseEvent>(){
+
+            @Override
+            public void handle(MouseEvent event) {
+                xOffset = event.getSceneX();
+                yOffset = event.getSceneY();
+                System.out.println(xOffset+"-"+yOffset);
+            }
+        
+        });
+             dashboard.setOnMouseDragged(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event) {
+                stage.setX(event.getScreenX()-xOffset);
+                stage.setY(event.getScreenY()-yOffset);
+            }
+        
+        });
     }
     
     // The Login Launshing Methode
