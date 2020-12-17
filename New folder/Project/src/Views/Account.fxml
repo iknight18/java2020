@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="200.0" prefWidth="100.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="200.0" prefWidth="100.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AccountController">
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="116.0" prefWidth="1005.0" style="-fx-background-color: linear-gradient(from 50% 50% to 100% 50%, #FC7753, #FDAB94);">
          <children>
@@ -28,7 +28,7 @@
                   <Insets left="20.0" />
                </HBox.margin>
             </ImageView>
-            <Text fill="#403d58" strokeType="OUTSIDE" strokeWidth="0.0" text="Malek BARNAT">
+            <Text fx:id="username" fill="#403d58" strokeType="OUTSIDE" strokeWidth="0.0" text="Malek BARNAT">
                <font>
                   <Font name="SansSerif Bold" size="29.0" />
                </font>
@@ -43,7 +43,7 @@
                         <Font name="SansSerif Bold" size="21.0" />
                      </font>
                   </Text>
-                  <Text fill="#403d58" strokeType="OUTSIDE" strokeWidth="0.0" text="2000,000">
+                  <Text fx:id="solde" fill="#403d58" strokeType="OUTSIDE" strokeWidth="0.0" text="2000,000">
                      <font>
                         <Font name="SansSerif Bold" size="28.0" />
                      </font>
@@ -76,7 +76,7 @@
             <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
          </padding>
          <children>
-            <VBox prefHeight="630.0" prefWidth="437.0" style="-fx-background-color: linear-gradient(from 50% 50% to 100% 50%, #CBCADA, #B2AFC7); -fx-background-radius: 10px;" HBox.hgrow="ALWAYS">
+            <VBox minWidth="450.0" prefHeight="630.0" prefWidth="437.0" style="-fx-background-color: linear-gradient(from 50% 50% to 100% 50%, #CBCADA, #B2AFC7); -fx-background-radius: 10px;" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
@@ -89,7 +89,7 @@
                         <Insets left="10.0" top="10.0" />
                      </VBox.margin>
                   </Text>
-                  <GridPane alignment="CENTER" hgap="5.0" prefHeight="154.0" prefWidth="523.0" vgap="5.0" VBox.vgrow="ALWAYS">
+                  <GridPane fx:id="grid" alignment="CENTER" hgap="5.0" prefHeight="154.0" prefWidth="523.0" vgap="5.0" VBox.vgrow="ALWAYS">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="30.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -114,6 +114,16 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
                      <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Name :" GridPane.halignment="RIGHT">
+                           <font>
+                              <Font name="SansSerif Bold" size="20.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Family Name :" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="SansSerif Bold" size="20.0" />
+                           </font>
+                        </Text>
                         <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="ID :" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                            <font>
                               <Font name="SansSerif Bold" size="20.0" />
@@ -144,12 +154,7 @@
                               <Font name="SansSerif Bold" size="20.0" />
                            </font>
                         </Text>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Name :" GridPane.halignment="RIGHT">
-                           <font>
-                              <Font name="SansSerif Bold" size="20.0" />
-                           </font>
-                        </Text>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Family Name :" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Governorate :" GridPane.halignment="RIGHT" GridPane.rowIndex="8">
                            <font>
                               <Font name="SansSerif Bold" size="20.0" />
                            </font>
@@ -159,10 +164,13 @@
                               <Font name="SansSerif Bold" size="20.0" />
                            </font>
                         </Text>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Governorate :" GridPane.halignment="RIGHT" GridPane.rowIndex="8">
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Email :" GridPane.halignment="RIGHT" GridPane.rowIndex="10">
                            <font>
                               <Font name="SansSerif Bold" size="20.0" />
                            </font>
+                           <GridPane.margin>
+                              <Insets left="20.0" />
+                           </GridPane.margin>
                         </Text>
                         <Text fill="#403d58" strokeType="OUTSIDE" strokeWidth="0.0" text="Malek" GridPane.columnIndex="1">
                            <font>
@@ -244,14 +252,6 @@
                               <Insets left="5.0" />
                            </GridPane.margin>
                         </Text>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Email :" GridPane.halignment="RIGHT" GridPane.rowIndex="10">
-                           <font>
-                              <Font name="SansSerif Bold" size="20.0" />
-                           </font>
-                           <GridPane.margin>
-                              <Insets left="20.0" />
-                           </GridPane.margin>
-                        </Text>
                         <Text fill="#403d58" strokeType="OUTSIDE" strokeWidth="0.0" text="seppy@gmail.cpm" GridPane.columnIndex="1" GridPane.rowIndex="10">
                            <font>
                               <Font name="SansSerif Regular" size="20.0" />
@@ -281,7 +281,7 @@
                                     <Image url="@../Images/card.png" />
                                  </image>
                               </ImageView>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="2012 2012 1023 2012">
+                              <Text fx:id="rib" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="2012 2012 1023 2012">
                                  <StackPane.margin>
                                     <Insets top="50.0" />
                                  </StackPane.margin>
@@ -289,12 +289,12 @@
                                     <Font name="SansSerif Regular" size="25.0" />
                                  </font>
                               </Text>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Malek BARNAT" StackPane.alignment="BOTTOM_LEFT">
+                              <Text fx:id="name" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Malek BARNAT" StackPane.alignment="CENTER">
                                  <font>
                                     <Font name="SansSerif Regular" size="18.0" />
                                  </font>
                                  <StackPane.margin>
-                                    <Insets bottom="40.0" left="70.0" />
+                                    <Insets right="100.0" top="110.0" />
                                  </StackPane.margin>
                               </Text>
                            </children>
@@ -306,7 +306,12 @@
                         <Insets bottom="20.0" left="20.0" right="20.0" />
                      </VBox.margin>
                      <children>
-                        <JFXTextField alignment="CENTER" prefHeight="84.0" prefWidth="379.0" promptText="Amount" VBox.vgrow="ALWAYS">
+                        <Text fx:id="error" fill="#c60101" strokeType="OUTSIDE" strokeWidth="0.0">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <JFXTextField fx:id="amount" alignment="CENTER" prefHeight="84.0" prefWidth="379.0" promptText="Amount" VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                            </VBox.margin>
@@ -316,7 +321,7 @@
                         </JFXTextField>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <JFXButton prefHeight="65.0" prefWidth="379.0" style="-fx-background-color: FC7753;" text="Deposit" HBox.hgrow="ALWAYS">
+                              <JFXButton onAction="#deposit" prefHeight="65.0" prefWidth="379.0" style="-fx-background-color: FC7753;" text="Deposit" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </HBox.margin>
@@ -324,7 +329,7 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </JFXButton>
-                              <JFXButton prefHeight="65.0" prefWidth="379.0" style="-fx-background-color: FC7753;" text="Withdraw">
+                              <JFXButton onAction="#withdraw" prefHeight="65.0" prefWidth="379.0" style="-fx-background-color: FC7753;" text="Withdraw">
                                  <HBox.margin>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </HBox.margin>

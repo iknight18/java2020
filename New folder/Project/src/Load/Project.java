@@ -31,12 +31,12 @@ public class Project extends Application {
     
     // The Dashboard Launshing Methode
     public void Dashboard() throws IOException{
-    FXMLLoader dashLoader = new FXMLLoader(getClass().getResource("/Views/Dashboard.fxml"));
+        FXMLLoader dashLoader = new FXMLLoader(getClass().getResource("/Views/Dashboard.fxml"));
         Parent dashboard = dashLoader.load();
         Scene scene = new Scene(dashboard);
         Stage stage = new Stage();
         stage.setScene(scene);
-        stage.initStyle(StageStyle.TRANSPARENT);
+        //stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();
         // Drag Handle
             dashboard.setOnMousePressed(new EventHandler<MouseEvent>(){
@@ -104,6 +104,7 @@ public class Project extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
+        System.out.println("Hani bdit!");
         Login(); // starting with Login
     }
 
