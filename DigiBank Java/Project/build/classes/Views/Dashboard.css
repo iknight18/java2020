@@ -1,0 +1,15 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.SelectedMenu{
+-fx-border-width :  0 0 0.2 5;
+-fx-border-color :  #FC7753;
+-fx-cursor : hand;
+-fx-background-color :  rgba(0,0,0,0.08);
+}
+.UnselectedMenu{
+-fx-border-width :  0 0 0.2 0;
+-fx-border-color :  #FC7753;
+-fx-cursor : hand;
+}
