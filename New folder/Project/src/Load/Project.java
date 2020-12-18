@@ -36,7 +36,7 @@ public class Project extends Application {
         Scene scene = new Scene(dashboard);
         Stage stage = new Stage();
         stage.setScene(scene);
-        //stage.initStyle(StageStyle.TRANSPARENT);
+        stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();
         // Drag Handle
             dashboard.setOnMousePressed(new EventHandler<MouseEvent>(){
@@ -104,7 +104,7 @@ public class Project extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        System.out.println("Hani bdit!");
+        System.out.println("Started!");
         Login(); // starting with Login
     }
 

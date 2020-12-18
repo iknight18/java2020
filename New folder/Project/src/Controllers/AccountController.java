@@ -7,12 +7,17 @@ package Controllers;
 
 import Models.Compte;
 import Models.Personne;
+import Models.Transaction;
 import com.jfoenix.controls.JFXTextField;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -32,6 +37,8 @@ public class AccountController implements Initializable {
      * Initializes the controller class.
      */
     @FXML
+    FontAwesomeIconView exbutton;
+    @FXML
     GridPane grid;
     @FXML
     Text username;
@@ -50,6 +57,8 @@ public class AccountController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        exbutton.setOnMousePressed(e -> Platform.exit());
+
         try {
             username.setText(Authentification.user);
             p = Authentification.getUserInfo();
@@ -65,12 +74,19 @@ public class AccountController implements Initializable {
     @FXML
     private void deposit(ActionEvent e) {
         try {
+            error.setText("");
             Float s = Float.parseFloat(amount.getText());
             c.deposit(s);
             c.setViewInfo(solde, rib);
             Authentification.UpdateInfo(p, c);
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+            Date date = new Date();
+            Transaction t = new Transaction(p, c, "DEPOSIT", formatter.format(date),s);
+            t.addTransaction();
+            amount.clear();
 
         } catch (NumberFormatException ex) {
+            error.setText("Please enter a number !");
             amount.setStyle("-fx-prompt-text-fill: #a10000");
             System.out.println(ex.getMessage());
         }
@@ -86,6 +102,11 @@ public class AccountController implements Initializable {
             }
             c.setViewInfo(solde, rib);
             Authentification.UpdateInfo(p, c);
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+            Date date = new Date();
+            Transaction t = new Transaction(p, c, "WITHDRAWAL", formatter.format(date),s);
+            t.addTransaction();
+            amount.clear();
         } catch (NumberFormatException ex) {
             error.setText("Please enter a number !");
             System.out.println(ex.getMessage());

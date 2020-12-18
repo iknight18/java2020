@@ -5,12 +5,18 @@
  */
 package Models;
 
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
 import java.lang.reflect.Field;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import javax.mail.internet.ParseException;
 
 /**
  *
@@ -119,7 +125,145 @@ public class Personne {
         t = (Text) gp.getChildren().get(21);
         t.setText(email);
     }
-    public void setName(Text n){
-        n.setText(prenom +" "+nom.toUpperCase());
+    public void setGridSetting(GridPane gp){
+            JFXComboBox c;
+            JFXTextField t = (JFXTextField) gp.getChildren().get(11);
+        t.setText(nom);
+        t = (JFXTextField) gp.getChildren().get(12);
+        t.setText(prenom);
+        t = (JFXTextField) gp.getChildren().get(13);
+        t.setText(cin);
+        c = (JFXComboBox) gp.getChildren().get(14);
+        c.getSelectionModel().select(sexe);
+        t = (JFXTextField) gp.getChildren().get(15);
+        t.setText(DateNaiss);
+        t = (JFXTextField) gp.getChildren().get(16);
+        t.setText(num);
+        t = (JFXTextField) gp.getChildren().get(17);
+        t.setText(Adresse);
+        t = (JFXTextField) gp.getChildren().get(18);
+        t.setText(zip);
+        t = (JFXTextField) gp.getChildren().get(19);
+        t.setText(gov);
+        c = (JFXComboBox) gp.getChildren().get(20);
+        c.getSelectionModel().select(status);
+        t = (JFXTextField) gp.getChildren().get(21);
+        t.setText(email);
+    }
+    public int setCin(String cin) {
+        if (cin.length() != 8) {
+            return 0;
+        } else {
+            try {
+                Integer.parseInt(cin);
+                this.cin = cin;
+                return 1;
+            } catch (NumberFormatException e) {
+                return -1;
+            }
+        }
+    }
+
+    public int setNom(String nom) {
+        if (nom.length() > 30) {
+            return -1;
+        } else if (nom.matches("[a-zA-Z\\s']+")) {
+            this.nom = nom;
+            return 1;
+        } else {
+            return 0;
+        }
+
+    }
+
+    public int setPrenom(String prenom) {
+        if (prenom.length() > 30) {
+            return -1;
+        } else if (prenom.matches("[a-zA-Z\\s']+")) {
+            this.prenom = prenom;
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    public void setSexe(String sexe) {
+        this.sexe = sexe;
+    }
+
+    public int setDateNaiss(String DateNaiss) {
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+
+        try {
+            format.parse(DateNaiss);
+            this.DateNaiss = DateNaiss;
+            return 1;
+        } catch (java.text.ParseException ex) {
+            return 0;
+
+        }
+    }
+
+    public int setNum(String num) {
+        try {
+            Integer.parseInt(num);
+            this.num = num;
+            return 1;
+        } catch (NumberFormatException e) {
+            return 0;
+        }
+    }
+
+    public void setVille(String Ville) {
+        this.Ville = Ville;
+
+    }
+
+    public void setAdresse(String Adresse) {
+        this.Adresse = Adresse;
+    }
+
+    public int setZip(String zip) {
+        if (zip.length() != 4) {
+            return 0;
+        } else {
+            try {
+                Integer.parseInt(zip);
+                this.zip = zip;
+                return 1;
+            } catch (NumberFormatException e) {
+                return -1;
+            }
+        }
+    }
+
+    public int setGov(String gov) {
+
+        if (gov.matches("[a-zA-Z\\s']+")) {
+            this.gov = gov;
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public int setEmail(String email) {
+
+        if (email.matches("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$")) {
+            this.email = email;
+            System.out.println("Email is Valid");
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
+
+    public void setName(Text n) {
+        n.setText(prenom + " " + nom.toUpperCase());
     }
 }

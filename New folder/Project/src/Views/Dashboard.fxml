@@ -26,7 +26,7 @@
                         <Insets bottom="15.0" top="15.0" />
                      </VBox.margin>
                   </ImageView>
-                  <JFXButton alignment="CENTER" prefHeight="55.0" prefWidth="289.0" styleClass="SelectedMenu" text="Account Summary" textFill="#403d58" VBox.vgrow="NEVER">
+                  <JFXButton fx:id="accountbtn" alignment="CENTER" onAction="#accountBtn" prefHeight="55.0" prefWidth="289.0" styleClass="SelectedMenu" text="Account Summary" textFill="#403d58" VBox.vgrow="NEVER">
                      <font>
                         <Font name="SansSerif Bold" size="17.0" />
                      </font>
@@ -37,7 +37,7 @@
                         <Insets />
                      </opaqueInsets>
                   </JFXButton>
-                  <JFXButton alignment="CENTER" prefHeight="55.0" prefWidth="289.0" style="-fx-cursor: hand; -fx-border-color: FC7753; -fx-border-width: 0 0 0.2 0;" styleClass="UnselectedMenu" text="Transactions Management" textFill="#403d58" VBox.vgrow="NEVER">
+                  <JFXButton fx:id="transbtn" alignment="CENTER" onAction="#transBtn" prefHeight="55.0" prefWidth="289.0" styleClass="UnselectedMenu" text="Transactions Management" textFill="#403d58" VBox.vgrow="NEVER">
                      <font>
                         <Font name="SansSerif Bold" size="17.0" />
                      </font>
@@ -48,7 +48,7 @@
                         <Insets />
                      </opaqueInsets>
                   </JFXButton>
-                  <JFXButton alignment="CENTER" prefHeight="55.0" prefWidth="289.0" style="-fx-cursor: hand; -fx-border-width: 0 0 0.2 0;" styleClass="UnselectedMenu" text="Generate Documents" textFill="#403d58" VBox.vgrow="NEVER">
+                  <JFXButton fx:id="genbtn" alignment="CENTER" onAction="#generateBtn" prefHeight="55.0" prefWidth="289.0" styleClass="UnselectedMenu" text="Generate Documents" textFill="#403d58" VBox.vgrow="NEVER">
                      <font>
                         <Font name="SansSerif Bold" size="17.0" />
                      </font>
@@ -68,7 +68,7 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </FontAwesomeIconView>
-                              <FontAwesomeIconView fill="WHITE" glyphName="GEAR" size="25">
+                              <FontAwesomeIconView fx:id="gearbtn" fill="WHITE" glyphName="GEAR" onMousePressed="#gearBtn" size="25">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -79,6 +79,7 @@
                   </VBox>
                </children>
             </VBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" />
          </children>
       </HBox>
    </children>

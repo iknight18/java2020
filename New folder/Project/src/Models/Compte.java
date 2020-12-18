@@ -5,6 +5,7 @@
  */
 package Models;
 
+import Controllers.Authentification;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -16,6 +17,7 @@ import javafx.scene.text.Text;
  * @author feres
  */
 public class Compte {
+
     String idCompte;
     String type;
     String mdp;
@@ -48,10 +50,14 @@ public class Compte {
     }
 
     public Compte(ResultSet rs, Personne pers) {
-        p = pers;
 
         try {
             rs.next();
+            if (pers == null) {
+                p = Authentification.getUserInfo(rs.getString(1));
+            } else {
+                p = pers;
+            }
             idCompte = rs.getString(2);
             RIB = rs.getString(3);
             mdp = rs.getString(4);
@@ -62,16 +68,25 @@ public class Compte {
         }
 
     }
-    public void setViewInfo(Text s,Text r){
+
+    public void setViewInfo(Text s, Text r) {
         s.setText(Solde.toString());
-        r.setText(RIB);
+        if (r != null) {
+            r.setText(RIB);
+        }
     }
-    public void deposit(Float sld){
+
+    public void deposit(Float sld) {
         Solde += sld;
     }
-    public int withdraw(Float sld){
-    if(Solde-sld >= 0) {Solde -=sld; return 1;}
-    else return 0;
+
+    public int withdraw(Float sld) {
+        if (Solde - sld >= 0) {
+            Solde -= sld;
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
 }
