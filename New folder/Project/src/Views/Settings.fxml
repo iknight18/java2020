@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="621.0" prefWidth="789.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.SettingsController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="621.0" prefWidth="789.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.SettingsController">
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="135.0" prefWidth="789.0" style="-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #B5E2FA, #0FA3B1);">
          <children>
@@ -180,11 +180,6 @@
                      </font>
                   </Text>
                   <JFXButton buttonType="RAISED" onAction="#save" prefHeight="50.0" prefWidth="285.0" style="-fx-background-color: FC7753;" text="Save" VBox.vgrow="ALWAYS">
-                     <VBox.margin>
-                        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
-                     </VBox.margin>
-                  </JFXButton>
-                  <JFXButton buttonType="RAISED" prefHeight="50.0" prefWidth="395.0" style="-fx-background-color: FC7753;" text="Clear History">
                      <VBox.margin>
                         <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
                      </VBox.margin>

@@ -16,10 +16,13 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -67,7 +70,11 @@ public class TransactionsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         exbutton.setOnMousePressed(e -> Platform.exit());
 
-        refreshTransactions();
+        try {
+            refreshTransactions();
+        } catch (SQLException ex) {
+            Logger.getLogger(TransactionsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         refreshTransfer();
 
 
@@ -81,7 +88,7 @@ public class TransactionsController implements Initializable {
             Logger.getLogger(AccountController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void refreshTransactions(){
+    public void refreshTransactions() throws SQLException{
             //create cols;
         TableColumn<Transaction, String> idcol
                 = new TableColumn<Transaction, String>("ID");
@@ -128,6 +135,16 @@ public class TransactionsController implements Initializable {
         tabletransfer.setItems(Authentification.getTransferHist());
         tabletransfer.getColumns().clear();
         tabletransfer.getColumns().addAll(idcol, Typecol, datecol, amount,compte);
+    }
+    @FXML
+    private void clearhist(ActionEvent event) throws SQLException{
+        ObservableList<Transaction> trans = Authentification.getTransactionsHist();
+        ObservableList<Virement> virm = Authentification.getTransferHist();
+        List<String> transID = trans.stream().map(transaction -> transaction.getIdT()).collect(Collectors.toList());
+        List<String> virmID = virm.stream().map(virement -> virement.getIdv()).collect(Collectors.toList());
+        Authentification.clearHistory(transID, virmID);
+        this.refreshTransactions();
+        this.refreshTransfer();
     }
     @FXML
     private void transfer(ActionEvent event) throws Exception {

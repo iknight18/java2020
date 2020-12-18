@@ -103,9 +103,9 @@ public class Personne {
 
     public void setGrid(GridPane gp) {
         Text t = (Text) gp.getChildren().get(11);
-        t.setText(nom);
-        t = (Text) gp.getChildren().get(12);
         t.setText(prenom);
+        t = (Text) gp.getChildren().get(12);
+        t.setText(nom);
         t = (Text) gp.getChildren().get(13);
         t.setText(cin);
         t = (Text) gp.getChildren().get(14);
@@ -128,9 +128,9 @@ public class Personne {
     public void setGridSetting(GridPane gp){
             JFXComboBox c;
             JFXTextField t = (JFXTextField) gp.getChildren().get(11);
-        t.setText(nom);
-        t = (JFXTextField) gp.getChildren().get(12);
         t.setText(prenom);
+        t = (JFXTextField) gp.getChildren().get(12);
+        t.setText(nom);
         t = (JFXTextField) gp.getChildren().get(13);
         t.setText(cin);
         c = (JFXComboBox) gp.getChildren().get(14);

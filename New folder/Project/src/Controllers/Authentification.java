@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,7 +32,9 @@ public class Authentification {
     public static String Cin = "N";
     public static String user = "";
 
-    public static ObservableList<Transaction> getTransactionsHist() {
+    public static ObservableList<Transaction> getTransactionsHist() throws SQLException {
+        Personne p = getUserInfo();
+        Compte c = getCompteInfo(p);
         ObservableList<Transaction> transactions = FXCollections.observableArrayList();
         Transaction t;
         Connection conn = DBCon.connect();
@@ -39,30 +42,33 @@ public class Authentification {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("select idtransaction,type,date_t,amount from transaction where cin ='" + Cin + "'");
             while (rs.next()) {
-                t = new Transaction(getUserInfo(), getCompteInfo(getUserInfo()), rs.getString(2), rs.getString(3), rs.getFloat(4));
+                t = new Transaction(p, c, rs.getString(2), rs.getString(3), rs.getFloat(4));
                 t.setIdT(rs.getString(1));
                 transactions.add(t);
             }
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Authentification.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return transactions;
     }
+
     public static ObservableList<Virement> getTransferHist() {
         ObservableList<Virement> virements = FXCollections.observableArrayList();
         Virement t;
         Connection conn = DBCon.connect();
         try {
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from virement where idcompteemm ='" + user + "' or idcompteacc ='"+user+"'");
+            ResultSet rs = stmt.executeQuery("select * from virement where idcompteemm ='" + user + "' or idcompteacc ='" + user + "'");
+                        
             while (rs.next()) {
-                t = new Virement(rs.getString(2),getCompteInfo(getUserInfo(rs.getString(3))),getCompteInfo(getUserInfo(rs.getString(5))), rs.getFloat(7));
+                t = new Virement(rs.getString(2), getCompteInfo(getUserInfo(rs.getString(3))), getCompteInfo(getUserInfo(rs.getString(5))), rs.getFloat(7));
                 t.setIdv(rs.getString(1));
                 virements.add(t);
-                
+
             }
-                        conn.close();
+            conn.close();
 
         } catch (SQLException ex) {
             Logger.getLogger(Authentification.class.getName()).log(Level.SEVERE, null, ex);
@@ -70,6 +76,7 @@ public class Authentification {
 
         return virements;
     }
+
     public static boolean checkRIB(String rib) {
         Connection conn = DBCon.connect();
         try {
@@ -77,19 +84,38 @@ public class Authentification {
             ResultSet rs = stmt.executeQuery("select rib from compte where rib ='" + rib + "'");
 
             if (!rs.next()) {
-                                        conn.close();
+                conn.close();
 
                 return false;
             } else {
-                                        conn.close();
+                conn.close();
 
                 return true;
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(Authentification.class.getName()).log(Level.SEVERE, null, ex);
             return false;
 
+        }
+    }
+
+    public static void clearHistory(List<String> transId, List<String> virmID) {
+        try {
+            Connection conn = DBCon.connect();
+            for (String id : transId) {
+                Statement stmt = conn.createStatement();
+                stmt.execute("delete from transaction where idtransaction = '" + id + "'");
+                stmt.close();
+            }
+            for (String id : virmID) {
+                Statement stmt = conn.createStatement();
+                stmt.execute("delete from virement where idvirement = '" + id + "'");
+                stmt.close();
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Authentification.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -108,7 +134,7 @@ public class Authentification {
                 return Cin;
 
             }
-                        conn.close();
+            conn.close();
 
         } catch (Exception ex) {
             Logger.getLogger(Authentification.class.getName()).log(Level.SEVERE, null, ex);
@@ -172,6 +198,7 @@ public class Authentification {
         conn.close();
         return c;
     }
+
     public static Personne getUserInfo(String cin) {
         Connection conn = DBCon.connect();
         try {
@@ -182,10 +209,12 @@ public class Authentification {
             Logger.getLogger(Authentification.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
-    }    public static Compte getCompteInfo(String rib) throws SQLException {
+    }
+
+    public static Compte getCompteInfo(String rib) throws SQLException {
         Connection conn = DBCon.connect();
         Statement stmt = conn.createStatement();
-        Compte c = new Compte(stmt.executeQuery("select * from compte where rib ='"+rib+"'"), null);
+        Compte c = new Compte(stmt.executeQuery("select * from compte where rib ='" + rib + "'"), null);
         return c;
     }
 
@@ -224,7 +253,7 @@ public class Authentification {
             System.out.println(qry2);
 
             stmt.executeUpdate(qry2);
-                        conn.close();
+            conn.close();
 
         } catch (SQLException ex) {
             Logger.getLogger(Authentification.class.getName()).log(Level.SEVERE, null, ex);
